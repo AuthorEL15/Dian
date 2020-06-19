@@ -1,0 +1,31 @@
+<center><h2>Daftar Album</h2></center>
+<?php 
+
+include "app/Album.php";
+
+$album = new Album();
+$rows = $album->tampil();
+
+?>
+
+<table>
+	<tr>
+		<th>ALBUM</th>
+		<th>ARTIS</th>
+		<th>LAGU</th>
+	</tr>
+	<?php $no=0; foreach ($rows as $row) { $no++;?>
+		<tr>
+			<td><?php echo $row['ALBUM']; ?></td>
+			<td><?php echo $row['ARTIST']; ?></td>
+			<td>
+				<?php if (!empty($row['track_file'])) { ?>
+					<audio controls>
+						<source src="<?php echo "./layout/assets/uploads/" . $row['track_file']; ?>" type="audio/mpeg">
+							Your browser does not support the audio element.
+						</audio>					
+					<?php } ?>
+				</td>
+			</tr>
+		<?php } ?>
+	</table>
